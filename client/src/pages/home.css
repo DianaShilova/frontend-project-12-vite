@@ -1,0 +1,132 @@
+#chat {
+}
+
+.chat-body {
+  flex-grow: 1;
+  display: flex;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+NAV {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.nav-login {
+  text-decoration: none;
+  color: #484545;
+}
+.body-container {
+  height: calc(100% - 3rem);
+  display: flex;
+  flex-grow: 1;
+  margin: 1.5rem 1.5rem !important;
+}
+
+.channels-container {
+  width: 220px;
+  background-color: #f8f9fa;
+  padding: 16px 8px;
+  border-right: 1px solid #dee2e6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.channels-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 8px 24px 24px;
+}
+
+.channels-add {
+  border: 1px solid blue;
+  border-radius: 2px;
+  font-size: 16px;
+  color: blue;
+  background-color: transparent;
+}
+
+.channels-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  height: 100%;
+}
+
+.group-channel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.channels-button {
+  width: 150px;
+  text-align: left;
+  border-radius: 0;
+  border: none;
+  padding: 8px 8px;
+  font-size: 16px;
+  background-color: transparent;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.group-channel.active {
+  background: rgba(0, 0, 0, 0.075);
+}
+
+.channels-option {
+  border: 0px;
+  background-color: transparent;
+  font-size: 10px;
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.messages-header {
+  padding: 16px 16px;
+  box-shadow: rgba(0, 0, 0, 0.075) 0px 2px 4px 0px;
+}
+
+.messages-content {
+  flex-grow: 1;
+  background-color: white;
+  padding: 48px;
+  overflow-y: scroll;
+}
+
+.text-break {
+  background-color: white;
+}
+
+.messages-form {
+  background-color: white;
+  padding: 16px 48px;
+}
+
+.messages-input-wrapper {
+  display: flex;
+  padding: 8px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+.messages-input {
+  font-size: 16px;
+  flex-grow: 1;
+  border: none;
+}
+
+.messages-send {
+  background-color: white;
+  border: 1px solid #888;
+  border-radius: 4px;
+  height: 20px;
+  width: 20px;
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Chat(Slack)",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_OPTIONS='--inspect --openssl-legacy-provider' npm run build --prefix frontend",
+    "start-backend": "npx start-server -s ./frontend/build",
+    "start-frontend": "cd frontend && npm start",
+    "start-dev": "REACT_APP_SERVER_URL=http://localhost:3000 concurrently \"npm run start-frontend\" \"npm run start-backend\"",
+    "start": "start-server -s ./frontend/build",
+    "postinstall": "cd frontend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DianaShilova/frontend-project-12.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DianaShilova/frontend-project-12/issues"
+  },
+  "homepage": "https://github.com/DianaShilova/frontend-project-12#readme",
+  "dependencies": {
+    "@hexlet/chat-server": "^2.0.0",
+    "formik": "^2.4.5",
+    "lorem-ipsum": "^2.0.8",
+    "react-router-dom": "^6.20.0",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@eslint/js": "^9.7.0",
+    "@playwright/test": "^1.42.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "^20.11.24",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.7.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.17.0"
+  }
+}
