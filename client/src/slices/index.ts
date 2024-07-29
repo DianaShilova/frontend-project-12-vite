@@ -11,8 +11,10 @@ const store = configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
     [channelsApi.reducerPath]: channelsApi.reducer,
   },
-  middleware: (getDefMiddl) => getDefMiddl().concat(usersApi.middleware, channelsApi.middleware),
+  middleware: (getDefMiddl) =>
+    getDefMiddl().concat(usersApi.middleware, channelsApi.middleware),
 });
 
 export type IRootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 export default store;

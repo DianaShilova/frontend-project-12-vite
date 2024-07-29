@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
@@ -16,23 +16,19 @@ import {
   addMessage,
 } from '../slices/messagesSlice';
 import { AuthContext } from '../contexts/authContext';
+import { selectCurrentChannelId } from '../slices/selectors';
 
 // const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 const useData = () => {
   const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
-  const channelId = useSelector((store) => store.channels.currentChannelId);
+  const channelId = useSelector(selectCurrentChannelId);
   const navigate = useNavigate();
 
-  const headers = useMemo(() => {
-    if (authContext.isAuthenticated) {
-      return {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      };
-    }
-    return {};
-  }, [authContext.isAuthenticated]);
+  const headers = {
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  };
 
   useEffect(() => {
     const channelsRequest = axios.get('/api/v1/channels', { headers });
@@ -48,44 +44,41 @@ const useData = () => {
           navigate('/login');
         }
       });
-  }, [dispatch, headers, navigate]);
+  }, []);
 
   const socket = useMemo(() => {
     if (authContext.isAuthenticated) {
-      return io();
+      return io('http://localhost:5001', { transports: ['websocket'] });
     }
     return null;
   }, [authContext.isAuthenticated]);
 
-  const handleSetChannel = useCallback(
-    (id) => {
-      dispatch(setChannel(id));
-    },
-    [dispatch]
-  );
+  const handleSetChannel = (id: any) => {
+    dispatch(setChannel(id));
+  };
 
   useEffect(() => {
     if (!socket) {
       return navigate('/login');
     }
-    const handleNewMessage = (message) => {
+    const handleNewMessage = (message: any) => {
       dispatch(addMessage(message));
     };
     socket.on('newMessage', handleNewMessage);
 
-    const handleNewChannel = (channel) => {
+    const handleNewChannel = (channel: any) => {
       dispatch(addChannel(channel));
     };
     socket.on('newChannel', handleNewChannel);
 
-    const handleRemoveChannel = (channel) => {
+    const handleRemoveChannel = (channel: any) => {
       dispatch(removeChannel(channel.id));
       handleSetChannel('1');
       dispatch(removeMessages(channel.id));
     };
     socket.on('removeChannel', handleRemoveChannel);
 
-    const handleEditChannel = ({ id, name }) => {
+    const handleEditChannel = ({ id, name }: any) => {
       dispatch(updateChannel({ id, name }));
     };
     socket.on('renameChannel', handleEditChannel);
@@ -96,9 +89,9 @@ const useData = () => {
       socket.off('removeChannel', handleRemoveChannel);
       socket.off('renameChannel', handleEditChannel);
     };
-  }, [socket, dispatch, navigate, handleSetChannel]);
+  }, [socket]);
 
-  const sendMessage = async (value) =>
+  const sendMessage = async (value: any) =>
     axios.post(
       '/api/v1/messages',
       {
@@ -109,7 +102,7 @@ const useData = () => {
       { headers }
     );
 
-  const sendChannel = async (channelName) =>
+  const sendChannel = async (channelName: any) =>
     axios.post(
       '/api/v1/channels',
       {
@@ -118,10 +111,10 @@ const useData = () => {
       { headers }
     );
 
-  const deleteChannel = async (id) =>
+  const deleteChannel = async (id: any) =>
     axios.delete(`/api/v1/channels/${id}`, { headers });
 
-  const renameChannel = async (id, name) =>
+  const renameChannel = async (id: any, name: any) =>
     axios.patch(
       `/api/v1/channels/${id}`,
       {
