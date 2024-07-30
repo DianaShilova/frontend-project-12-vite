@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface IProps {
 
 const DeletingChannelModal = (props: IProps) => {
   const { isOpen, onClose, onSubmit } = props;
+  const { t } = useTranslation();
+
   const handleDeleteClick = () => {
     onSubmit();
     onClose();
@@ -17,15 +20,15 @@ const DeletingChannelModal = (props: IProps) => {
   return (
     <Modal show={isOpen} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Удалить канал</Modal.Title>
+        <Modal.Title>{t('deleteModal.deleteChannel')}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Уверены?</Modal.Body>
+      <Modal.Body>{t('deleteModal.confirmation')}</Modal.Body>
       <Modal.Footer>
         <Button variant='secondary' onClick={onClose}>
-          Отменить
+          {t('deleteModal.cancel')}
         </Button>
         <Button variant='danger' onClick={handleDeleteClick}>
-          Удалить
+          {t('deleteModal.delete')}
         </Button>
       </Modal.Footer>
     </Modal>
