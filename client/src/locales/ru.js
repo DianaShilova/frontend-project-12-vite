@@ -52,6 +52,7 @@ export default {
       deleteChannel: 'Удалить канал',
       confirmation: 'Уверены ?',
       delete: 'Удалить',
+      cancel: 'Отменить',
     },
     message: {
       numeral: {
@@ -65,6 +66,7 @@ export default {
     channelMenu: {
       delete: 'Удалить',
       rename: 'Переимновать',
+      control: 'Управление каналом',
     },
     footer: {
       haveNotAccount: 'Нет аккаунта?',

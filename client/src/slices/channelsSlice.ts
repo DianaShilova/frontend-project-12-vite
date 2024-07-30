@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Channel, Channels } from '../types/store';
+import { Channel, IChannels } from '../types/store';
 
-const initialState: Channels = {
+const initialState: IChannels = {
   ids: [],
   entities: {},
   currentChannelId: '1',

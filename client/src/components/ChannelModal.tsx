@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -30,30 +30,35 @@ const ChannelModal = (props: IProps) => {
     }
   }, [isOpen]);
 
-  const validate = (values: { channelName: string }) => {
-    const errors: { name?: string } = {};
+  const validate = useCallback(
+    (values: { channelName: string }) => {
+      const errors: { name?: string } = {};
 
-    const channelsArr = Object.values(channels);
-    const existingChannel = channelsArr.find(
-      (ch) => ch.name === values.channelName
-    );
-    if (!channel && existingChannel) {
-      errors.name = t('addModal.validationModal.alreadyExists');
-    }
-    if (!values.channelName) {
-      errors.name = t('addModal.validationModal.required');
-    }
-    if (values.channelName.length < 3 || values.channelName.length > 20) {
-      errors.name = t('addModal.validationModal.minMax');
-    }
-    return errors;
-  };
+      const channelsArr = Object.values(channels);
+      const existingChannel = channelsArr.find(
+        (ch) => ch.name === values.channelName
+      );
+      if (!channel && existingChannel) {
+        errors.name = t('addModal.validationModal.alreadyExists');
+      }
+      if (!values.channelName) {
+        errors.name = t('addModal.validationModal.required');
+      }
+      if (values.channelName.length < 3 || values.channelName.length > 20) {
+        errors.name = t('addModal.validationModal.minMax');
+      }
+      return errors;
+    },
+    [channels, channel]
+  );
 
-  const handleSubmit =
+  const handleSubmit = useCallback(
     (values: { channelName: string }) => (e: React.FormEvent) => {
       e.preventDefault();
       onSubmit(values);
-    };
+    },
+    [onSubmit]
+  );
 
   return (
     <div className='modal show'>

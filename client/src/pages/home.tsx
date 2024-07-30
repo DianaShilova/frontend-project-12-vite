@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo, useCallback } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -6,13 +6,17 @@ import { toast } from 'react-toastify';
 import filter from 'leo-profanity';
 import useData from '../hooks/useData';
 import ChannelModal from '../components/ChannelModal';
-import ChannelOption from '../components/channelOption';
 import DeletingChannelModal from '../components/DeletingChannelModal';
 import { AuthContext } from '../contexts/authContext';
 
 import './home.css';
 import { IRootState } from '../slices';
-import { Channels, Messages } from '../types/store';
+import { IChannels, Messages } from '../types/store';
+import { Navbar } from './components/Navbar';
+import { Channels } from './components/Channels';
+import { MessagesField } from './components/MessagesField';
+import { MessagesTitle } from './components/MessagesTitle';
+import { MessageInput } from './components/MessageInput';
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
@@ -30,11 +34,11 @@ const HomePage = () => {
     renameChannel,
   } = useData();
 
-  const channels = useSelector<IRootState, Channels>((state) => {
+  const channels = useSelector<IRootState, IChannels>((state) => {
     if (state && state.channels) {
       return state.channels;
     }
-    return {} as Channels;
+    return {} as IChannels;
   });
 
   const messages = useSelector<IRootState, Messages>((store) => {
@@ -54,82 +58,17 @@ const HomePage = () => {
     return '';
   });
 
-  const filtered = Object.values(messages.entities).filter(
-    (message) => message.channelId === currentChannelId
+  const filtered = useMemo(
+    () =>
+      Object.values(messages.entities).filter(
+        (message) => message.channelId === currentChannelId
+      ),
+    [currentChannelId, messages]
   );
-
-  const messagesQuantity = filtered.length;
-
-  type TWordMessage = {
-    manyCase: string;
-    singularCase: string;
-    genitiveCase: string;
-  };
-
-  const wordMessage = (quantity: number, word: TWordMessage): string => {
-    // getMessageFroQuantity
-    const lastNumber = quantity % 10;
-    if (quantity === 0) {
-      return word.manyCase;
-    }
-    if (quantity > 4 && quantity < 21) {
-      return word.manyCase;
-    }
-    if (lastNumber === 1) {
-      return word.singularCase;
-    }
-    if (lastNumber > 1 && lastNumber < 5) {
-      return word.genitiveCase;
-    }
-    return word.manyCase;
-  };
-
-  const handleOpenDeleteModal = (id: string): void => {
-    setSelectedChannel(id);
-    setIsOpenModalDelete(true);
-  };
-
-  const handleOpenEditModal = (selectedChannel: string): void => {
-    setSelectedChannel(selectedChannel);
-    setIsOpenModal(true);
-  };
 
   const handleCloseChannelModal = (): void => {
     setIsOpenModal(false);
   };
-
-  const renderChannels = (): JSX.Element[] =>
-    channels.ids.map((id: string) => (
-      <li key={id}>
-        <div
-          className={
-            currentChannelId === id ? 'group-channel active' : 'group-channel'
-          }
-        >
-          <button
-            className={
-              currentChannelId === id
-                ? 'w-100 rounded-0 text-start text-truncate btn btn-secondary'
-                : 'channels-button'
-            }
-            name={channels.entities[id].name}
-            onClick={() => handleSetChannel(id)}
-            id={channels.entities[id].name}
-            type='button'
-          >
-            <span className='me-1'>#</span>
-            {channels.entities[id].name}
-          </button>
-          {channels.entities[id].removable && (
-            <ChannelOption
-              id={id}
-              onDelete={() => handleOpenDeleteModal(id)}
-              onEdit={() => handleOpenEditModal(id)}
-            />
-          )}
-        </div>
-      </li>
-    ));
 
   const handleDeleteChannel = async (): Promise<void> => {
     try {
@@ -142,22 +81,18 @@ const HomePage = () => {
     }
   };
 
-  const renderMessages = (): JSX.Element[] =>
-    filtered.map((message: any) => (
-      <div key={message.id}>
-        <b>{message.name}</b>:{message.text}
-      </div>
-    ));
-
-  const handleSubmitMessage = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    try {
-      await sendMessage(filter.clean(input));
-      setInput('');
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
+  const handleSubmitMessage = useCallback(
+    async (e: React.FormEvent): Promise<void> => {
+      e.preventDefault();
+      try {
+        await sendMessage(filter.clean(input));
+        setInput('');
+      } catch (error) {
+        console.log('error', error);
+      }
+    },
+    [input, sendMessage]
+  );
 
   const handleSubmitChannel = async (values: {
     channelName: string;
@@ -192,70 +127,32 @@ const HomePage = () => {
   return (
     <>
       <header>
-        <nav>
-          <div className='navbarcontainer'>
-            <a className='nav-login' href='/login'>
-              Hexlet Chat
-            </a>
-            <button type='button' onClick={authContext.logout}>
-              {t('nav.exit')}
-            </button>
-          </div>
-        </nav>
+        <Navbar isLogin={true} />
       </header>
+
       <main className='chat-body'>
         <div className='body-container shadow'>
-          <section className='channels-container'>
-            <header className='channels-header'>
-              <b>{t('channelsContainer.channel')}</b>
-              <button
-                type='button'
-                className='channels-add'
-                onClick={handleAddChannel}
-              >
-                +
-              </button>
-            </header>
-            {channels ? (
-              <ul className='channels-list'>{renderChannels()}</ul>
-            ) : (
-              <span>Loading</span>
-            )}
-          </section>
+          <Channels
+            channels={channels}
+            onAddChannel={handleAddChannel}
+            setSelectedChannel={setSelectedChannel}
+            setIsOpenModal={setIsOpenModal}
+            setIsOpenModalDelete={setIsOpenModalDelete}
+            currentChannelId={currentChannelId}
+            onSetChannel={handleSetChannel}
+          />
           <section className='messages-container'>
-            <div className='messages-header'>
-              <span>
-                #{' '}
-                {channels.entities[currentChannelId] &&
-                  channels.entities[currentChannelId].name}
-                <br /> {messagesQuantity}{' '}
-                {wordMessage(messagesQuantity, {
-                  manyCase: t('message.numeral.manyCase'),
-                  genitiveCase: t('message.numeral.genitiveCase'),
-                  singularCase: t('message.numeral.nominativeCase'),
-                })}
-              </span>
-            </div>
-            <div className='messages-content'>
-              {messages ? renderMessages() : <span>Loading</span>}
-            </div>
-            <form className='messages-form' onSubmit={handleSubmitMessage}>
-              <div className='messages-input-wrapper'>
-                <input
-                  className='messages-input'
-                  aria-label='Новое сообщение'
-                  placeholder={t('message.messagesPlaceholder')}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  required
-                />
-                <button
-                  aria-label='message-send'
-                  type='button'
-                  className='messages-send'
-                />
-              </div>
-            </form>
+            <MessagesTitle
+              channels={channels}
+              currentChannelId={currentChannelId}
+              filtered={filtered}
+            />
+            <MessagesField filtered={filtered} messages={messages} />
+            <MessageInput
+              input={input}
+              setInput={setInput}
+              onSubmitMessage={handleSubmitMessage}
+            />
           </section>
         </div>
       </main>

@@ -1,10 +1,10 @@
 import { IRootState } from '.';
-import { Channel, Channels, Messages } from '../types/store';
+import { Channel, IChannels, Messages } from '../types/store';
 
 export const selectChannels = (store: IRootState) => store?.channels.entities;
 
 export const selectChannel =
-  (store: { channels: Channels; messages: Messages }) =>
+  (store: { channels: IChannels; messages: Messages }) =>
   (id: string | null): Channel | null => {
     if (id) {
       return store?.channels.entities[id];
@@ -14,6 +14,6 @@ export const selectChannel =
   };
 
 export const selectCurrentChannelId = (store: {
-  channels: Channels;
+  channels: IChannels;
   messages: Messages;
 }) => store.channels.currentChannelId;
