@@ -12,7 +12,7 @@ import { AuthContext } from '../contexts/authContext';
 
 import './home.css';
 import { IRootState } from '../slices';
-import { Channels, Messages } from '../../types/store';
+import { Channels, Messages } from '../types/store';
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
@@ -30,11 +30,29 @@ const HomePage = () => {
     renameChannel,
   } = useData();
 
-  const channels = useSelector<IRootState, Channels>((store) => store.channels);
-  const messages = useSelector<IRootState, Messages>((store) => store.messages);
-  const currentChannelId = useSelector<IRootState>(
-    (store) => store.channels.currentChannelId
-  );
+  const channels = useSelector<IRootState, Channels>((state) => {
+    if (state && state.channels) {
+      return state.channels;
+    }
+    return {} as Channels;
+  });
+
+  const messages = useSelector<IRootState, Messages>((store) => {
+    if (store && store.messages) {
+      return store.messages;
+    }
+    return {} as Messages;
+  });
+
+  const currentChannelId = useSelector<IRootState, string | ''>((store) => {
+    if (store && store.channels) {
+      if (store.channels.currentChannelId) {
+        return store.channels.currentChannelId;
+      }
+    }
+
+    return '';
+  });
 
   const filtered = Object.values(messages.entities).filter(
     (message) => message.channelId === currentChannelId
@@ -81,7 +99,7 @@ const HomePage = () => {
   };
 
   const renderChannels = (): JSX.Element[] =>
-    channels.ids.map((id) => (
+    channels.ids.map((id: string) => (
       <li key={id}>
         <div
           className={
@@ -125,7 +143,7 @@ const HomePage = () => {
   };
 
   const renderMessages = (): JSX.Element[] =>
-    filtered.map((message) => (
+    filtered.map((message: any) => (
       <div key={message.id}>
         <b>{message.name}</b>:{message.text}
       </div>
@@ -214,7 +232,7 @@ const HomePage = () => {
                 {wordMessage(messagesQuantity, {
                   manyCase: t('message.numeral.manyCase'),
                   genitiveCase: t('message.numeral.genitiveCase'),
-                  singularCase: t('message.numeral.singularCase'),
+                  singularCase: t('message.numeral.nominativeCase'),
                 })}
               </span>
             </div>
