@@ -12,6 +12,8 @@ interface Props {
   onSetChannel: (id: string) => void;
 }
 
+console.log(123);
+
 export const Channels = (props: Props) => {
   const {
     channels,
