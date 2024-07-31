@@ -32,20 +32,20 @@ const ChannelModal = (props: IProps) => {
 
   const validate = useCallback(
     (values: { channelName: string }) => {
-      const errors: { name?: string } = {};
+      const errors: { channelName?: string } = {};
 
       const channelsArr = Object.values(channels);
       const existingChannel = channelsArr.find(
         (ch) => ch.name === values.channelName
       );
       if (!channel && existingChannel) {
-        errors.name = t('addModal.validationModal.alreadyExists');
+        errors.channelName = t('addModal.validationModal.alreadyExists');
       }
       if (!values.channelName) {
-        errors.name = t('addModal.validationModal.required');
+        errors.channelName = t('addModal.validationModal.required');
       }
       if (values.channelName.length < 3 || values.channelName.length > 20) {
-        errors.name = t('addModal.validationModal.minMax');
+        errors.channelName = t('addModal.validationModal.minMax');
       }
       return errors;
     },

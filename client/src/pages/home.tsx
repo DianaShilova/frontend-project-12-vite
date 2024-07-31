@@ -43,9 +43,9 @@ const HomePage = () => {
 
   const messages = useSelector<IRootState, Messages>((store) => {
     if (store && store.messages) {
-      return store.messages;
+      return store.messages as Messages;
     }
-    return {} as Messages;
+    return { ids: [], entities: {} } as Messages;
   });
 
   const currentChannelId = useSelector<IRootState, string | ''>((store) => {
