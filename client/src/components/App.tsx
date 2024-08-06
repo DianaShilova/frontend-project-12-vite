@@ -21,7 +21,7 @@ const App = (): JSX.Element => (
   <>
     <ProviderRollbar config={rollbarConfig}>
       <ErrorBoundary>
-        <BrowserRouter>
+        <BrowserRouter basename='/frontend-project-12-vite'>
           <Provider store={store}>
             <AuthProvider>
               <Routes>
