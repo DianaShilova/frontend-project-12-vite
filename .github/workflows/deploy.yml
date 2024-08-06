@@ -21,7 +21,10 @@ jobs:
   deploy:
     environment:
       name: github-pages
+
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      VITE_API_URL: ${{vars.VITE_API_URL}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
