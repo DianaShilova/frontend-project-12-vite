@@ -23,10 +23,3 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
-
-  deploy:
-    needs: eslint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: npm run deploy
