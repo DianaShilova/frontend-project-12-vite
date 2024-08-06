@@ -19,6 +19,8 @@ export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType
 );
 
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem('token')
@@ -31,7 +33,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const dispatch = useDispatch();
   const login = async (values: { username: string; password: string }) => {
     try {
-      const result = await axios.post('/api/v1/login', values);
+      const result = await axios.post(`${API_URL}/api/v1/login`, values);
       const { token } = result.data;
       setUsername(result.data.username);
 

@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
 export const SignupWindow = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
@@ -50,7 +51,10 @@ export const SignupWindow = () => {
           validationSchema={schema}
           onSubmit={async (values, formikBag) => {
             try {
-              const { data } = await axios.post('/api/v1/signup', values);
+              const { data } = await axios.post(
+                `${API_URL}/api/v1/signup`,
+                values
+              );
               authContext.setToken(data);
               navigate('/');
             } catch (error: any) {

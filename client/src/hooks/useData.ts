@@ -19,6 +19,7 @@ import { AuthContext } from '../contexts/authContext';
 import { selectCurrentChannelId } from '../slices/selectors';
 
 // const serverUrl = process.env.REACT_APP_SERVER_URL;
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 const useData = () => {
   const dispatch = useDispatch();
@@ -31,8 +32,12 @@ const useData = () => {
   };
 
   useEffect(() => {
-    const channelsRequest = axios.get('/api/v1/channels', { headers });
-    const messagesRequest = axios.get('/api/v1/messages', { headers });
+    const channelsRequest = axios.get(`${API_URL}/api/v1/channels`, {
+      headers,
+    });
+    const messagesRequest = axios.get(`${API_URL}/api/v1/messages`, {
+      headers,
+    });
 
     Promise.all([channelsRequest, messagesRequest])
       .then(([channelsData, messagesData]) => {
@@ -93,7 +98,7 @@ const useData = () => {
 
   const sendMessage = async (value: any) =>
     axios.post(
-      '/api/v1/messages',
+      `${API_URL}/api/v1/messages`,
       {
         text: value,
         name: authContext.username,
@@ -104,7 +109,7 @@ const useData = () => {
 
   const sendChannel = async (channelName: any) =>
     axios.post(
-      '/api/v1/channels',
+      `${API_URL}/api/v1/channels`,
       {
         name: channelName,
       },
@@ -112,11 +117,11 @@ const useData = () => {
     );
 
   const deleteChannel = async (id: any) =>
-    axios.delete(`/api/v1/channels/${id}`, { headers });
+    axios.delete(`${API_URL}/api/v1/channels/${id}`, { headers });
 
   const renameChannel = async (id: any, name: any) =>
     axios.patch(
-      `/api/v1/channels/${id}`,
+      `${API_URL}/api/v1/channels/${id}`,
       {
         id,
         name,
