@@ -8,7 +8,7 @@
     "start-backend": "npx start-server -s ./frontend/build",
     "start-frontend": "cd frontend && npm start",
     "start-dev": "REACT_APP_SERVER_URL=http://localhost:3000 concurrently \"npm run start-frontend\" \"npm run start-backend\"",
-    "start": "start-server -s ./frontend/build"
+    "start": "start-server"
   },
   "repository": {
     "type": "git",
