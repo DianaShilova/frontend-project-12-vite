@@ -27,8 +27,8 @@ const App = (): JSX.Element => (
               <Routes>
                 <Route path='login' element={<LoginPage />} />
                 <Route path='/' element={<HomePage />} />
-                <Route path='*' element={<NotFoundPage />} />
                 <Route path='signup' element={<SignupPage />} />
+                <Route path='*' element={<NotFoundPage />} />
               </Routes>
             </AuthProvider>
           </Provider>
