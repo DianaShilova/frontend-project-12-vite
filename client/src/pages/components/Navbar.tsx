@@ -11,14 +11,21 @@ export const Navbar = (props: Props) => {
   const authContext = useContext(AuthContext);
 
   return (
-    <header>
-      <nav>
-        <div className='navbarcontainer'>
-          <a className='nav-login' href='/login'>
+    <header className='bg-white shadow mx-4 mt-1'>
+      <nav className='px-4 w-full'>
+        <div className='flex justify-between items-center py-2 max-w-7xl mx-auto'>
+          <a
+            className='text-xl no-underline font-bold text-blue-800 hover:text-gray-600'
+            href='/login'
+          >
             Hexlet Chat
           </a>
           {isLogin && (
-            <button type='button' onClick={authContext.logout}>
+            <button
+              type='button'
+              onClick={authContext.logout}
+              className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors'
+            >
               {t('nav.exit')}
             </button>
           )}

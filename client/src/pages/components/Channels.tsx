@@ -36,27 +36,25 @@ export const Channels = (props: Props) => {
     setIsOpenModal(true);
   };
 
-  const renderChannels = (): JSX.Element[] =>
-    channels.ids.map((id: string) => (
+  const renderChannels = () =>
+    channels.ids.map((id) => (
       <li key={id}>
         <div
-          className={
-            currentChannelId === id ? 'group-channel active' : 'group-channel'
-          }
+          className={`group-channel ${
+            currentChannelId === id ? 'bg-blue-100' : ''
+          }`}
         >
           <button
-            className={
+            className={`w-full max-w-full rounded-md text-left px-3 py-2 transition-colors duration-200 truncate ${
               currentChannelId === id
-                ? 'w-100 rounded-0 text-start text-truncate btn btn-secondary'
-                : 'channels-button'
-            }
-            name={channels.entities[id].name}
+                ? 'bg-blue-500 text-white'
+                : 'hover:bg-gray-200 text-gray-700'
+            }`}
             onClick={() => onSetChannel(id)}
-            id={channels.entities[id].name}
             type='button'
           >
-            <span className='me-1'>#</span>
-            {channels.entities[id].name}
+            <span className='mr-1'>#</span>
+            <span className='truncate'>{channels.entities[id].name}</span>
           </button>
           {channels.entities[id].removable && (
             <ChannelOption
@@ -70,18 +68,37 @@ export const Channels = (props: Props) => {
     ));
 
   return (
-    <section className='channels-container'>
-      <header className='channels-header'>
-        <b>{t('channelsContainer.channel')}</b>
-        <button type='button' className='channels-add' onClick={onAddChannel}>
-          +
+    <div className='w-full sm:w-[350px] bg-gray-50 p-2 sm:p-4 border-r border-gray-200 flex flex-col h-[270px] sm:h-full'>
+      <div className='flex justify-between items-center mb-6'>
+        <h2 className='text-lg font-semibold text-gray-800 pl-2 pt-3'>
+          {t('channelsContainer.channel')}
+        </h2>
+        <button
+          type='button'
+          className='bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200'
+          onClick={onAddChannel}
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-5 w-5'
+            viewBox='0 0 20 20'
+            fill='currentColor'
+          >
+            <path
+              fillRule='evenodd'
+              d='M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z'
+              clipRule='evenodd'
+            />
+          </svg>
         </button>
-      </header>
+      </div>
       {channels ? (
-        <ul className='channels-list'>{renderChannels()}</ul>
+        <ul className='list-none p-0 m-0 overflow-y-auto flex-grow'>
+          {renderChannels()}
+        </ul>
       ) : (
         <span>Loading</span>
       )}
-    </section>
+    </div>
   );
 };

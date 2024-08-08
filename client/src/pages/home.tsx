@@ -125,13 +125,13 @@ const HomePage = () => {
     return <Navigate to='/login' />;
   }
   return (
-    <>
+    <div className='flex flex-col h-screen'>
       <header>
         <Navbar isLogin={true} />
       </header>
 
       <main className='chat-body'>
-        <div className='body-container shadow'>
+        <div className='body-container flex flex-col sm:flex-row shadow'>
           <Channels
             channels={channels}
             onAddChannel={handleAddChannel}
@@ -167,7 +167,7 @@ const HomePage = () => {
         isOpen={isOpenModalDelete}
         onClose={handleCloseDeleteModal}
       />
-    </>
+    </div>
   );
 };
 
