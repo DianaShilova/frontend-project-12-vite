@@ -18,10 +18,10 @@ export const LoginWindow = () => {
   });
 
   return (
-    <div className='sign in flex justify-center mt-20'>
+    <div className='sign in flex justify-center mx-4 mt-20'>
       <div className='signin-container flex row signin border-2 border-blue-200 rounded-lg mx-10'>
-        <div className='card-body flex justify-between p-5'>
-          <div className='signup-image-container pt-10'>
+        <div className='card-body flex justify-center lg:justify-around p-4'>
+          <div className='hidden lg:block pt-10'>
             <img src={image} alt={t('image.login')} />
           </div>
 
@@ -41,7 +41,7 @@ export const LoginWindow = () => {
             }}
           >
             {({ errors, touched, handleChange, values }) => (
-              <Form className='signup-form-container w-50'>
+              <Form className='w-full lg:w-[320px]'>
                 <h1 className='text-center mb-4'>{t('loginForm.enter')}</h1>
                 <FormBootstrap.Group
                   className='username input mb-3'
