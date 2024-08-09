@@ -68,9 +68,9 @@ export const Channels = (props: Props) => {
     ));
 
   return (
-    <div className='w-full sm:w-[350px] bg-gray-50 p-2 sm:p-4 border-r border-gray-200 flex flex-col h-[270px] sm:h-full'>
-      <div className='flex justify-between items-center mb-6'>
-        <h2 className='text-lg font-semibold text-gray-800 pl-2 pt-3'>
+    <div className='w-full border-r sm:border-gray-200 sm:w-[350px] bg-gray-50 p-2 sm:p-4 flex flex-col h-[270px] sm:h-full'>
+      <div className='flex h-[50px] justify-between items-center px-2 py-3 mb-3'>
+        <h2 className='text-lg font-semibold text-gray-800 pt-2'>
           {t('channelsContainer.channel')}
         </h2>
         <button

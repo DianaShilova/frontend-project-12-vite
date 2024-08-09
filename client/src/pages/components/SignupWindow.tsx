@@ -36,14 +36,10 @@ export const SignupWindow = () => {
   });
 
   return (
-    <div className='flex justify-center items-center min-h-screen bg-gray-100 p-4'>
-      <div className='w-full max-w-4xl bg-white rounded-lg shadow-md overflow-hidden md:flex'>
-        <div className='md:w-1/2 hidden md:block'>
-          <img
-            src={image}
-            alt={t('image.registration')}
-            className='w-full h-full p-4'
-          />
+    <div className='flex justify-center items-center min-h-screen bg-gray-100 p-[0px] sm:p-[24px]'>
+      <div className='w-full max-w-4xl bg-white rounded-lg shadow-md overflow-hidden justify-around md:flex'>
+        <div className='hidden lg:block flex self-center'>
+          <img src={image} alt={t('image.login')} />
         </div>
         <div className='md:w-1/2 p-8'>
           <Formik
@@ -72,11 +68,11 @@ export const SignupWindow = () => {
             }}
           >
             {({ errors, touched, values, handleChange }) => (
-              <Form className='space-y-6'>
+              <Form className='space-y-9'>
                 <h1 className='text-3xl sm:text-3xl text-lg font-bold text-center text-gray-800 mb-8'>
                   {t('signupForm.registration')}
                 </h1>
-                <div className='text-xs sm:text-base'>
+                <div className='text-base'>
                   <FloatingLabel
                     controlId='username'
                     label={t('signupForm.username')}
@@ -89,18 +85,18 @@ export const SignupWindow = () => {
                       isValid={touched.username && !errors.username}
                       isInvalid={!!errors.username}
                       onChange={handleChange}
-                      className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                      className='w-full px-3 pt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
                     <FormBootstrap.Control.Feedback
                       type='invalid'
                       tooltip
-                      className='text-red-500 text-sm mt-1'
+                      className='w-full text-red-500 text-sm mt-1'
                     >
                       {errors.username}
                     </FormBootstrap.Control.Feedback>
                   </FloatingLabel>
                 </div>
-                <div className='text-xs sm:text-base'>
+                <div className='text-base'>
                   <FloatingLabel
                     controlId='password'
                     label={t('signupForm.password')}
@@ -114,18 +110,18 @@ export const SignupWindow = () => {
                       isInvalid={!!errors.password}
                       onChange={handleChange}
                       type='password'
-                      className='text-base w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                      className='text-base w-full px-3 pt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
                     <FormBootstrap.Control.Feedback
                       type='invalid'
                       tooltip
-                      className='text-red-500 text-sm mt-1'
+                      className='w-full text-red-500 text-sm mt-1'
                     >
                       {errors.password}
                     </FormBootstrap.Control.Feedback>
                   </FloatingLabel>
                 </div>
-                <div className='text-xs sm:text-base'>
+                <div className='text-base'>
                   <FloatingLabel
                     controlId='confirmPassword'
                     label={t('signupForm.confirmPassword')}
@@ -141,12 +137,12 @@ export const SignupWindow = () => {
                       isInvalid={!!errors.confirmPassword}
                       onChange={handleChange}
                       type='password'
-                      className=' w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                      className=' w-full px-3 pt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
                     <FormBootstrap.Control.Feedback
                       type='invalid'
                       tooltip
-                      className='text-red-500 text-sm mt-1'
+                      className='w-full text-red-500 text-sm mt-1'
                     >
                       {errors.confirmPassword}
                     </FormBootstrap.Control.Feedback>
@@ -154,7 +150,7 @@ export const SignupWindow = () => {
                 </div>
                 <button
                   type='submit'
-                  className='w-full text-xs sm:text-base bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300'
+                  className='w-full text-base bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300'
                 >
                   {t('signupForm.register')}
                 </button>

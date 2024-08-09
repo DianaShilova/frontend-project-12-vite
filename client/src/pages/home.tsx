@@ -84,11 +84,14 @@ const HomePage = () => {
   const handleSubmitMessage = useCallback(
     async (e: React.FormEvent): Promise<void> => {
       e.preventDefault();
-      try {
-        await sendMessage(filter.clean(input));
-        setInput('');
-      } catch (error) {
-        console.log('error', error);
+      const trimmedInput = input.trim();
+      if (trimmedInput !== '') {
+        try {
+          await sendMessage(filter.clean(trimmedInput));
+          setInput('');
+        } catch (error) {
+          console.log('error', error);
+        }
       }
     },
     [input, sendMessage]
@@ -131,7 +134,7 @@ const HomePage = () => {
       </header>
 
       <main className='chat-body'>
-        <div className='body-container flex flex-col sm:flex-row shadow'>
+        <div className='m-[0px] sm:m-[24px] w-full flex flex-col sm:flex-row shadow'>
           <Channels
             channels={channels}
             onAddChannel={handleAddChannel}

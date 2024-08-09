@@ -12,8 +12,9 @@ export const MessageInput = (props: Props) => {
 
   return (
     <form
-      className='flex items-center p-3 border-t border-gray-200'
+      className='flex items-center py-[0px] px-[4px] sm:p-3 border-t border-gray-200'
       onSubmit={onSubmitMessage}
+      noValidate
     >
       <div className='relative flex-grow'>
         <input

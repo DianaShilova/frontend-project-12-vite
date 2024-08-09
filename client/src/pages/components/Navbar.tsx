@@ -11,7 +11,7 @@ export const Navbar = (props: Props) => {
   const authContext = useContext(AuthContext);
 
   return (
-    <header className='bg-white shadow mx-4 mt-1'>
+    <header className='bg-white shadow m-[0px] sm:mx-[24px] mt-1'>
       <nav className='px-4 w-full'>
         <div className='flex justify-between items-center py-2 max-w-7xl mx-auto'>
           <a

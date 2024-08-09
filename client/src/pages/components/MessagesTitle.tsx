@@ -16,7 +16,7 @@ export const MessagesTitle = (props: Props) => {
   const messagesQuantity = filtered.length;
 
   return (
-    <div className='bg-white border-b border-gray-200 p-3'>
+    <div className='bg-white border-b border-gray-200 p-[10px] sm:p-3'>
       <span className='text-lg font-semibold'>
         <span className='text-gray-600 mr-1'>#</span>
         {channels.entities[currentChannelId] &&
