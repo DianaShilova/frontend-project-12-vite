@@ -4,7 +4,6 @@
 .chat-body {
   flex-grow: 1;
   display: flex;
-  background-color: #f8f9fa;
   overflow: hidden;
 }
 
@@ -20,7 +19,6 @@
 
 .channels-container {
   width: 220px;
-  background-color: #f8f9fa;
   padding: 16px 8px;
   border-right: 1px solid #dee2e6;
   overflow: hidden;
@@ -87,22 +85,19 @@
 
 .messages-header {
   padding: 16px 16px;
-  box-shadow: rgba(0, 0, 0, 0.075) 0px 2px 4px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.075) 0px 2px 4px 0px; */
 }
 
 .messages-content {
   flex-grow: 1;
-  background-color: white;
   padding: 48px;
   overflow-y: scroll;
 }
 
 .text-break {
-  background-color: white;
 }
 
 .messages-form {
-  background-color: white;
   padding: 16px 48px;
 }
 
@@ -119,7 +114,6 @@
 }
 
 .messages-send {
-  background-color: white;
   border: 1px solid #888;
   border-radius: 4px;
   height: 20px;

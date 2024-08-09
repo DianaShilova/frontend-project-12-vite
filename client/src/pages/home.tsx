@@ -133,8 +133,8 @@ const HomePage = () => {
         <Navbar isLogin={true} />
       </header>
 
-      <main className='chat-body'>
-        <div className='m-[0px] sm:m-[24px] w-full flex flex-col sm:flex-row shadow'>
+      <main className='dark:bg-slate-900 chat-body'>
+        <div className='shadow-xl shadow-slate-500/40 m-[0px] sm:m-[24px] w-full flex flex-col sm:flex-row shadow'>
           <Channels
             channels={channels}
             onAddChannel={handleAddChannel}
@@ -144,7 +144,7 @@ const HomePage = () => {
             currentChannelId={currentChannelId}
             onSetChannel={handleSetChannel}
           />
-          <section className='messages-container'>
+          <section className='messages-container dark:bg-slate-900'>
             <MessagesTitle
               channels={channels}
               currentChannelId={currentChannelId}
