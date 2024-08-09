@@ -20,14 +20,19 @@ export const MessagesField = (props: Props) => {
 
   const renderMessages = (): JSX.Element[] =>
     filtered.map((message: Message) => (
-      <div key={message.id}>
-        <b>{message.name}</b>:{message.text}
+      <div key={message.id} className='mb-2'>
+        <b className='font-bold mr-1'>{message.name}</b>
+        <span className='text-gray-700'>{message.text}</span>
       </div>
     ));
 
   return (
-    <div className='messages-content'>
-      {messages ? renderMessages() : <span>Loading</span>}
+    <div className='h-[305px] sm:h-full overflow-y-auto p-4 bg-white break-words'>
+      {messages ? (
+        renderMessages()
+      ) : (
+        <span className='text-gray-500'>Loading</span>
+      )}
       <div ref={messagesEndRef} />
     </div>
   );

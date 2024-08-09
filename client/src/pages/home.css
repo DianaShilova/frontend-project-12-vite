@@ -20,7 +20,6 @@ NAV {
   height: calc(100% - 3rem);
   display: flex;
   flex-grow: 1;
-  margin: 1.5rem 1.5rem !important;
 }
 
 .channels-container {

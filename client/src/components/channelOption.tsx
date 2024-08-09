@@ -13,7 +13,7 @@ const ChannelOption = (props: IProps) => {
   return (
     <Dropdown>
       <Dropdown.Toggle variant='Secondary' id={id}>
-        <span className='visually-hidden'>{t('channelMenu.control')}</span>
+        <span className='visually-hidden '>{t('channelMenu.control')}</span>
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => onDelete()}>

@@ -18,11 +18,11 @@ export const LoginWindow = () => {
   });
 
   return (
-    <div className='sign in'>
-      <div className='signin-container signin'>
-        <div className='card-body'>
-          <div className='signup-image-container'>
-            <img src={image} alt={t(image.login)} />
+    <div className='sign in flex justify-center mx-4 mt-20'>
+      <div className='signin-container flex row signin border-2 border-blue-200 rounded-lg mx-10'>
+        <div className='card-body flex justify-center lg:justify-around p-4'>
+          <div className='hidden lg:block pt-10'>
+            <img src={image} alt={t('image.login')} />
           </div>
 
           <Formik
@@ -41,7 +41,7 @@ export const LoginWindow = () => {
             }}
           >
             {({ errors, touched, handleChange, values }) => (
-              <Form className='signup-form-container'>
+              <Form className='w-full lg:w-[320px]'>
                 <h1 className='text-center mb-4'>{t('loginForm.enter')}</h1>
                 <FormBootstrap.Group
                   className='username input mb-3'
@@ -51,7 +51,7 @@ export const LoginWindow = () => {
                     <FloatingLabel
                       controlId='username'
                       label={t('loginForm.nickname')}
-                      className='mb-3'
+                      className='mb-3 border-2 border-blue-100 rounded-lg'
                     >
                       <FormBootstrap.Control
                         name='username'
@@ -75,7 +75,7 @@ export const LoginWindow = () => {
                     <FloatingLabel
                       controlId='password'
                       label={t('loginForm.password')}
-                      className='mb-3'
+                      className='mb-3 border-2 border-blue-100 rounded-lg'
                     >
                       <FormBootstrap.Control
                         name='password'
@@ -92,18 +92,26 @@ export const LoginWindow = () => {
                     </FloatingLabel>
                   </InputGroup>
                 </FormBootstrap.Group>
-                <button className='buttonSign' type='submit'>
+                <button
+                  className='buttonSign border-2 border-blue-200 rounded-lg w-100 py-2'
+                  type='submit'
+                >
                   {t('loginForm.enter')}
                 </button>
               </Form>
             )}
           </Formik>
         </div>
-        <div className='card-footer'>
-          <div className='registration'>
+        <div className='card-footer flex justify-center mb-2'>
+          <div className='registration text-slate-400'>
             <span>
               {t('footer.haveNotAccount')}
-              <a href='/signup'>{t('footer.registration')}</a>
+              <a
+                className='text-blue-400 no-underline'
+                href='/frontend-project-12-vite/signup'
+              >
+                {t('footer.registration')}
+              </a>
             </span>
           </div>
         </div>
