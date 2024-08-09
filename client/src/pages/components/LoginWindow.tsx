@@ -106,7 +106,10 @@ export const LoginWindow = () => {
           <div className='registration text-slate-400'>
             <span>
               {t('footer.haveNotAccount')}
-              <a className='text-blue-400 no-underline' href='/signup'>
+              <a
+                className='text-blue-400 no-underline'
+                href='/frontend-project-12-vite/signup'
+              >
                 {t('footer.registration')}
               </a>
             </span>

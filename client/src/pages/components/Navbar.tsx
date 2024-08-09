@@ -16,7 +16,7 @@ export const Navbar = (props: Props) => {
         <div className='flex justify-between items-center py-2 max-w-7xl mx-auto'>
           <a
             className='text-xl no-underline font-bold text-blue-800 hover:text-gray-600'
-            href='/login'
+            href='/frontend-project-12-vite/login'
           >
             Hexlet Chat
           </a>
