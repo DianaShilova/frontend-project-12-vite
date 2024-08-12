@@ -18,7 +18,7 @@ export const MessageInput = (props: Props) => {
     >
       <div className='relative flex-grow'>
         <input
-          className='dark:bg-slate-800 dark:text-white w-full py-2 px-4 rounded-full border-1 border-gray-300 dark:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          className='dark:bg-slate-800 dark:text-white w-full py-2 px-[12px] pr-12 rounded-full border-1 border-gray-300 dark:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
           aria-label='Новое сообщение'
           placeholder={t('message.messagesPlaceholder')}
           value={input}

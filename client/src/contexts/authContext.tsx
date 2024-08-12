@@ -77,6 +77,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = (): void => {
     setIsAuthenticated(false);
     localStorage.clear();
+    localStorage.setItem('theme', theme);
     dispatch(clearChannels());
     navigate('/login');
   };
