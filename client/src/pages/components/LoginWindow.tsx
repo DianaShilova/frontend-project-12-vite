@@ -1,7 +1,7 @@
 import FormBootstrap from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel';
-import image from '../../images/person.png';
+import image from '../../images/black.png';
 import { Formik, Form } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
@@ -22,7 +22,11 @@ export const LoginWindow = () => {
       <div className='shadow-xl shadow-slate-500/40 signin-container dark:bg-slate-500 flex row signin border-2 border-blue-200 dark:border-blue-900 rounded-lg mx-10'>
         <div className=' card-body flex justify-center lg:justify-around p-4'>
           <div className='hidden lg:block pt-10'>
-            <img src={image} alt={t('image.login')} />
+            <img
+              src={image}
+              alt={t('image.login')}
+              className='w-[250px] h-[250px] object-cover'
+            />
           </div>
 
           <Formik
@@ -62,12 +66,12 @@ export const LoginWindow = () => {
                         isValid={touched.username && !errors.username}
                         isInvalid={!!errors.username}
                         onChange={handleChange}
-                        className='dark:bg-slate-600 dark:hover:bg-slate-600 dark:focus:bg-slate-600'
+                        className='dark:bg-slate-600 dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:text-white dark:active:text-white dark:focus:text-white'
                       />
                       <FormBootstrap.Control.Feedback
                         type='invalid'
                         tooltip
-                        className='dark:bg-red-800'
+                        className='w-full text-red-500 dark:text-white text-sm mt-1'
                       >
                         {errors.username}
                       </FormBootstrap.Control.Feedback>
@@ -92,12 +96,12 @@ export const LoginWindow = () => {
                         isInvalid={!!errors.password}
                         onChange={handleChange}
                         type='password'
-                        className='dark:bg-slate-600 dark:hover:bg-slate-600 dark:focus:bg-slate-600'
+                        className='dark:bg-slate-600 dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:text-white dark:active:text-white dark:focus:text-white'
                       />
                       <FormBootstrap.Control.Feedback
                         type='invalid'
                         tooltip
-                        className='dark:bg-red-800'
+                        className='w-full text-red-500 dark:text-white text-sm mt-1'
                       >
                         {errors.password}
                       </FormBootstrap.Control.Feedback>
@@ -105,7 +109,7 @@ export const LoginWindow = () => {
                   </InputGroup>
                 </FormBootstrap.Group>
                 <button
-                  className='dark:text-white buttonSign border-2 border-blue-200 dark:border-blue-400 rounded-lg w-100 py-2'
+                  className='w-full text-base bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-300'
                   type='submit'
                 >
                   {t('loginForm.enter')}
