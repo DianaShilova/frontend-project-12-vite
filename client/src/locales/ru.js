@@ -69,7 +69,7 @@ export default {
       control: 'Управление каналом',
     },
     footer: {
-      haveNotAccount: 'Нет аккаунта?',
+      haveNotAccount: 'Нет аккаунта? ',
       registration: 'Регистрация',
     },
     image: {
