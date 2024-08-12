@@ -44,7 +44,7 @@ export const Channels = (props: Props) => {
             className={`w-full max-w-full rounded-md text-left px-3 py-2 transition-colors duration-200 truncate ${
               currentChannelId === id
                 ? 'bg-blue-500 dark:bg-blue-800 text-white'
-                : 'hover:bg-gray-700 text-gray-700 dark:text-white '
+                : 'hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-white '
             }`}
             onClick={() => onSetChannel(id)}
             type='button'
@@ -71,7 +71,7 @@ export const Channels = (props: Props) => {
         </h2>
         <button
           type='button'
-          className='bg-blue-500 dark:bg-blue-800 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200'
+          className='bg-blue-500 dark:bg-blue-800 text-white rounded-full p-2 hover:bg-blue-600 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200'
           onClick={onAddChannel}
         >
           <svg
