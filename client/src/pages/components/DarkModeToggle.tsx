@@ -1,22 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import { AuthContext } from '../../contexts/authContext';
 
 export const DarkModeToggle = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, toggleTheme } = useContext(AuthContext);
 
   useEffect(() => {
-    if (darkMode) {
+    if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [darkMode]);
+  }, [theme]);
 
   return (
     <button
-      onClick={() => setDarkMode(!darkMode)}
+      onClick={() => toggleTheme()}
       className='p-2 rounded-full bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-white transition-colors duration-200 shadow-inner shadow-blue-200'
     >
-      {darkMode ? (
+      {theme === 'dark' ? (
         <svg
           className='w-6 h-6'
           fill='none'

@@ -96,7 +96,7 @@ export const LoginWindow = () => {
                         isInvalid={!!errors.password}
                         onChange={handleChange}
                         type='password'
-                        className='dark:bg-slate-600 dark:hover:bg-slate-600 dark:focus:bg-slate-600 dark:text-white dark:active:text-white dark:focus:text-white'
+                        className='dark:bg-slate-600 dark:hover:bg-slate-600 dark:autofill:bg-slate-600 dark:focus:bg-slate-600 dark:text-white dark:active:text-white dark:focus:text-white'
                       />
                       <FormBootstrap.Control.Feedback
                         type='invalid'

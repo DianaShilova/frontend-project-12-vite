@@ -165,7 +165,7 @@ const HomePage = () => {
             currentChannelId={currentChannelId}
             onSetChannel={handleSetChannel}
           />
-          <section className='messages-container dark:bg-slate-900'>
+          <section className='messages-container dark:bg-slate-900 overflow-hidden mr-[48px]'>
             <MessagesTitle
               channels={channels}
               currentChannelId={currentChannelId}

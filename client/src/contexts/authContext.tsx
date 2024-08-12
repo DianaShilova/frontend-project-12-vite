@@ -13,6 +13,8 @@ interface AuthContextType {
   login: (values: { username: string; password: string }) => void;
   logout: () => void;
   setToken: (data: { token: string; username: string }) => void;
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>(
@@ -28,10 +30,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [username, setUsername] = useState(() =>
     localStorage.getItem('username')
   );
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark' ? 'dark' : 'light';
+  });
+
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const isDarkMode = document.documentElement.classList.contains('dark');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   const login = async (values: { username: string; password: string }) => {
     try {
@@ -49,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         throw new Error(t('loginForm.validationLogin.error'));
       }
       if (error?.code === 'ERR_NETWORK') {
-        if (isDarkMode) {
+        if (theme === 'dark') {
           toast.error(t('loginForm.validationLogin.network'), {
             theme: 'dark',
           });
@@ -85,6 +97,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         logout,
         username,
         setToken,
+        theme,
+        toggleTheme,
       }}
     >
       {children}
