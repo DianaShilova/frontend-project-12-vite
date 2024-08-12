@@ -61,7 +61,7 @@ const ChannelModal = (props: IProps) => {
   );
 
   return (
-    <div className='modal show'>
+    <div className='modal show dark:bg-slate-900'>
       <Modal show={isOpen} onHide={onClose}>
         <Formik
           initialValues={{
@@ -74,19 +74,25 @@ const ChannelModal = (props: IProps) => {
           }}
         >
           {({ handleChange, handleBlur, values, errors }) => (
-            <Form onSubmit={handleSubmit(values)}>
-              <Modal.Header closeButton>
-                <Modal.Title>
+            <Form
+              onSubmit={handleSubmit(values)}
+              className='dark:bg-slate-700 dark:border-[1px] dark:border-blue-300 rounded-lg'
+            >
+              <Modal.Header
+                closeButton
+                className='dark:border-[1px] dark:border-blue-300'
+              >
+                <Modal.Title className='dark:text-blue-300 '>
                   {id ? t('editModal.editChannel') : t('addModal.addChannel')}
                 </Modal.Title>
               </Modal.Header>
-              <Modal.Body>
+              <Modal.Body className='dark:border-[1px] dark:border-blue-300'>
                 <Form.Group>
                   <Form.Label className='visually-hidden' htmlFor='channelName'>
                     {t('addModal.channelName')}
                   </Form.Label>
                   <Form.Control
-                    className='modal-input'
+                    className='dark:border-[1px] dark:border-blue-300 modal-input dark:bg-slate-700 dark:text-blue-100 dark:active:bg-slate-600 dark:focus:text-white dark:focus:bg-slate-600 dark:after:bg-slate-600'
                     ref={inputEl}
                     onChange={handleChange}
                     value={values.channelName}
@@ -96,12 +102,14 @@ const ChannelModal = (props: IProps) => {
                     required
                   />
                   {errors.channelName && (
-                    <div className='error-modal'>{errors.channelName}</div>
+                    <div className='error-modal dark:text-red-500'>
+                      {errors.channelName}
+                    </div>
                   )}
                 </Form.Group>
               </Modal.Body>
 
-              <Modal.Footer>
+              <Modal.Footer className='dark:border-[1px] dark:border-blue-300'>
                 <Button variant='secondary' onClick={onClose}>
                   {t('addModal.cancel')}
                 </Button>
@@ -109,6 +117,7 @@ const ChannelModal = (props: IProps) => {
                   type='submit'
                   disabled={!!errors.channelName}
                   variant='primary'
+                  className='dark:bg-blue-800 dark:text-white'
                 >
                   {t('addModal.send')}
                 </Button>

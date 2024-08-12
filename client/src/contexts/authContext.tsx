@@ -31,6 +31,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isDarkMode = document.documentElement.classList.contains('dark');
+
   const login = async (values: { username: string; password: string }) => {
     try {
       const result = await axios.post(`${API_URL}/api/v1/login`, values);
@@ -47,7 +49,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         throw new Error(t('loginForm.validationLogin.error'));
       }
       if (error?.code === 'ERR_NETWORK') {
-        toast.error(t('loginForm.validationLogin.network'));
+        if (isDarkMode) {
+          toast.error(t('loginForm.validationLogin.network'), {
+            theme: 'dark',
+          });
+        } else {
+          toast.error(t('loginForm.validationLogin.network'), {
+            theme: 'light',
+          });
+        }
       }
     }
   };

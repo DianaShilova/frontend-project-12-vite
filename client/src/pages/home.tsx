@@ -25,6 +25,7 @@ const HomePage = () => {
   const [isOpenModalDelete, setIsOpenModalDelete] = useState<boolean>(false);
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
   const { t } = useTranslation();
+  const isDarkMode = document.documentElement.classList.contains('dark');
 
   const {
     sendMessage,
@@ -73,7 +74,11 @@ const HomePage = () => {
   const handleDeleteChannel = async (): Promise<void> => {
     try {
       await deleteChannel(selectedChannel);
-      toast.success(t('delete'));
+      if (isDarkMode) {
+        toast.success(t('delete'), { theme: 'dark' });
+      } else {
+        toast.success(t('delete'), { theme: 'light' });
+      }
     } catch {
       console.log('error');
     } finally {
@@ -104,10 +109,26 @@ const HomePage = () => {
       if (!selectedChannel) {
         const { data } = await sendChannel(filter.clean(values.channelName));
         handleSetChannel(data.id);
-        toast.success(t('add'));
+        if (isDarkMode) {
+          toast.success(t('add'), {
+            theme: 'dark',
+          });
+        } else {
+          toast.success(t('add'), {
+            theme: 'light',
+          });
+        }
       } else {
         await renameChannel(selectedChannel, filter.clean(values.channelName));
-        toast.success(t('rename'));
+        if (isDarkMode) {
+          toast.success(t('rename'), {
+            theme: 'dark',
+          });
+        } else {
+          toast.success(t('rename'), {
+            theme: 'light',
+          });
+        }
       }
       handleCloseChannelModal();
       setSelectedChannel(null);
