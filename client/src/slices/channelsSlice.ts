@@ -16,10 +16,13 @@ const channelSlice = createSlice({
       state.entities[action.payload.id] = action.payload;
     },
     addChannels: (state, action: PayloadAction<Channel[]>) => {
+      const ids: string[] = [];
       action.payload.forEach((channel) => {
-        state.ids.push(channel.id);
+        ids.push(channel.id);
         state.entities[channel.id] = channel;
       });
+
+      state.ids = ids;
     },
     removeChannel: (state, action: PayloadAction<string>) => {
       state.ids = state.ids.filter((id) => id !== action.payload);
