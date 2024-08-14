@@ -31,3 +31,11 @@ export type TWordMessage = {
   singularCase: string;
   genitiveCase: string;
 };
+
+export type TEmoji =
+  | '/love'
+  | '/fire'
+  | '/firework'
+  | '/laugh'
+  | '/snow'
+  | '/confetti';

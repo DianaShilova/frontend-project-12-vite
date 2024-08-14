@@ -12,13 +12,13 @@ export const MessageInput = (props: Props) => {
 
   return (
     <form
-      className='flex items-center py-[0px] px-[4px] sm:p-3 border-t border-gray-200'
+      className='flex items-center py-[0px] px-[4px] sm:p-3 border-t border-gray-200 dark:border-[1px] dark:border-blue-300'
       onSubmit={onSubmitMessage}
       noValidate
     >
       <div className='relative flex-grow'>
         <input
-          className='w-full py-2 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          className='dark:bg-slate-800 dark:text-white w-full py-2 px-[12px] pr-12 rounded-full border-1 border-gray-300 dark:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
           aria-label='Новое сообщение'
           placeholder={t('message.messagesPlaceholder')}
           value={input}
@@ -28,7 +28,7 @@ export const MessageInput = (props: Props) => {
         <button
           aria-label='message-send'
           type='submit'
-          className='absolute right-1 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          className='absolute right-1 top-1/2 transform -translate-y-1/2 bg-blue-500 dark:bg-blue-800 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'

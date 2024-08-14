@@ -13,6 +13,8 @@ interface AuthContextType {
   login: (values: { username: string; password: string }) => void;
   logout: () => void;
   setToken: (data: { token: string; username: string }) => void;
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>(
@@ -28,9 +30,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [username, setUsername] = useState(() =>
     localStorage.getItem('username')
   );
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark' ? 'dark' : 'light';
+  });
+
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
   const login = async (values: { username: string; password: string }) => {
     try {
       const result = await axios.post(`${API_URL}/api/v1/login`, values);
@@ -47,7 +61,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         throw new Error(t('loginForm.validationLogin.error'));
       }
       if (error?.code === 'ERR_NETWORK') {
-        toast.error(t('loginForm.validationLogin.network'));
+        if (theme === 'dark') {
+          toast.error(t('loginForm.validationLogin.network'), {
+            theme: 'dark',
+          });
+        } else {
+          toast.error(t('loginForm.validationLogin.network'), {
+            theme: 'light',
+          });
+        }
       }
     }
   };
@@ -55,6 +77,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = (): void => {
     setIsAuthenticated(false);
     localStorage.clear();
+    localStorage.setItem('theme', theme);
     dispatch(clearChannels());
     navigate('/login');
   };
@@ -75,6 +98,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         logout,
         username,
         setToken,
+        theme,
+        toggleTheme,
       }}
     >
       {children}

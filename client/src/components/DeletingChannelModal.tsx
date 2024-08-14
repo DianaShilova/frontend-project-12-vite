@@ -19,15 +19,30 @@ const DeletingChannelModal = (props: IProps) => {
 
   return (
     <Modal show={isOpen} onHide={onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>{t('deleteModal.deleteChannel')}</Modal.Title>
+      <Modal.Header
+        closeButton
+        className='dark:bg-gray-700 dark:border-[1px] dark:border-blue-300'
+      >
+        <Modal.Title className='dark:text-blue-300 '>
+          {t('deleteModal.deleteChannel')}
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>{t('deleteModal.confirmation')}</Modal.Body>
-      <Modal.Footer>
-        <Button variant='secondary' onClick={onClose}>
+      <Modal.Body className='dark:bg-gray-700 dark:text-blue-100 dark:border-[1px] dark:border-blue-300'>
+        {t('deleteModal.confirmation')}
+      </Modal.Body>
+      <Modal.Footer className='dark:bg-gray-700 dark:border-[1px] dark:border-blue-300'>
+        <Button
+          variant='secondary'
+          onClick={onClose}
+          className='dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500'
+        >
           {t('deleteModal.cancel')}
         </Button>
-        <Button variant='danger' onClick={handleDeleteClick}>
+        <Button
+          variant='danger'
+          onClick={handleDeleteClick}
+          className='dark:bg-red-600 dark:hover:bg-red-700'
+        >
           {t('deleteModal.delete')}
         </Button>
       </Modal.Footer>

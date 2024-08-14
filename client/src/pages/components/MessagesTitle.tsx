@@ -16,13 +16,13 @@ export const MessagesTitle = (props: Props) => {
   const messagesQuantity = filtered.length;
 
   return (
-    <div className='bg-white border-b border-gray-200 p-[10px] sm:p-3'>
-      <span className='text-lg font-semibold'>
-        <span className='text-gray-600 mr-1'>#</span>
+    <div className='dark:bg-slate-800 border-b dark:border-[1px] border-gray-200 dark:border-blue-300 p-[10px] sm:p-3'>
+      <span className='text-lg font-semibold dark:text-white'>
+        <span className='text-gray-600 dark:text-white mr-1'>#</span>
         {channels.entities[currentChannelId] &&
           channels.entities[currentChannelId].name}
       </span>
-      <div className='text-sm text-gray-500 mt-1'>
+      <div className='text-sm text-gray-500 dark:text-light mt-1'>
         {messagesQuantity}{' '}
         {getMessageFromQuantity(messagesQuantity, {
           manyCase: t('message.numeral.manyCase'),

@@ -11,12 +11,13 @@ import { AuthContext } from '../contexts/authContext';
 
 import './home.css';
 import { IRootState } from '../slices';
-import { IChannels, Messages } from '../types/store';
+import { IChannels, Messages, TEmoji } from '../types/store';
 import { Navbar } from './components/Navbar';
 import { Channels } from './components/Channels';
 import { MessagesField } from './components/MessagesField';
 import { MessagesTitle } from './components/MessagesTitle';
 import { MessageInput } from './components/MessageInput';
+import EmojiAnimation from './components/animation/EmojiAnimation';
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
@@ -24,7 +25,10 @@ const HomePage = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenModalDelete, setIsOpenModalDelete] = useState<boolean>(false);
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
+  const [showHearts, setShowHearts] = useState(false);
+  const [emoji, setEmoji] = useState<TEmoji>('/love');
   const { t } = useTranslation();
+  const isDarkMode = document.documentElement.classList.contains('dark');
 
   const {
     sendMessage,
@@ -73,7 +77,11 @@ const HomePage = () => {
   const handleDeleteChannel = async (): Promise<void> => {
     try {
       await deleteChannel(selectedChannel);
-      toast.success(t('delete'));
+      if (isDarkMode) {
+        toast.success(t('delete'), { theme: 'dark' });
+      } else {
+        toast.success(t('delete'), { theme: 'light' });
+      }
     } catch {
       console.log('error');
     } finally {
@@ -87,7 +95,13 @@ const HomePage = () => {
       const trimmedInput = input.trim();
       if (trimmedInput !== '') {
         try {
-          await sendMessage(filter.clean(trimmedInput));
+          if (trimmedInput.startsWith('/')) {
+            setShowHearts(true);
+            setEmoji(trimmedInput as TEmoji);
+            setTimeout(() => setShowHearts(false), 3000); // Hide hearts after 3 seconds
+          } else {
+            await sendMessage(filter.clean(trimmedInput));
+          }
           setInput('');
         } catch (error) {
           console.log('error', error);
@@ -104,10 +118,26 @@ const HomePage = () => {
       if (!selectedChannel) {
         const { data } = await sendChannel(filter.clean(values.channelName));
         handleSetChannel(data.id);
-        toast.success(t('add'));
+        if (isDarkMode) {
+          toast.success(t('add'), {
+            theme: 'dark',
+          });
+        } else {
+          toast.success(t('add'), {
+            theme: 'light',
+          });
+        }
       } else {
         await renameChannel(selectedChannel, filter.clean(values.channelName));
-        toast.success(t('rename'));
+        if (isDarkMode) {
+          toast.success(t('rename'), {
+            theme: 'dark',
+          });
+        } else {
+          toast.success(t('rename'), {
+            theme: 'light',
+          });
+        }
       }
       handleCloseChannelModal();
       setSelectedChannel(null);
@@ -133,8 +163,9 @@ const HomePage = () => {
         <Navbar isLogin={true} />
       </header>
 
-      <main className='chat-body'>
-        <div className='m-[0px] sm:m-[24px] w-full flex flex-col sm:flex-row shadow'>
+      <main className='dark:bg-slate-900 chat-body'>
+        <div className='shadow-xl shadow-slate-500/40 m-[0px] sm:m-[24px] w-full flex flex-col sm:flex-row shadow'>
+          {showHearts && <EmojiAnimation command={emoji} />}
           <Channels
             channels={channels}
             onAddChannel={handleAddChannel}
@@ -144,7 +175,7 @@ const HomePage = () => {
             currentChannelId={currentChannelId}
             onSetChannel={handleSetChannel}
           />
-          <section className='messages-container'>
+          <section className='messages-container dark:bg-slate-900 overflow-hidden'>
             <MessagesTitle
               channels={channels}
               currentChannelId={currentChannelId}

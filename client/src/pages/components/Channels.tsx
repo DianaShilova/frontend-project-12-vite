@@ -39,16 +39,12 @@ export const Channels = (props: Props) => {
   const renderChannels = () =>
     channels.ids.map((id) => (
       <li key={id}>
-        <div
-          className={`group-channel ${
-            currentChannelId === id ? 'bg-blue-100' : ''
-          }`}
-        >
+        <div className='group-channel'>
           <button
             className={`w-full max-w-full rounded-md text-left px-3 py-2 transition-colors duration-200 truncate ${
               currentChannelId === id
-                ? 'bg-blue-500 text-white'
-                : 'hover:bg-gray-200 text-gray-700'
+                ? 'bg-blue-500 dark:bg-blue-800 text-white'
+                : 'hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-white '
             }`}
             onClick={() => onSetChannel(id)}
             type='button'
@@ -68,14 +64,14 @@ export const Channels = (props: Props) => {
     ));
 
   return (
-    <div className='w-full border-r sm:border-gray-200 sm:w-[350px] bg-gray-50 p-2 sm:p-4 flex flex-col h-[270px] sm:h-full'>
+    <div className='dark:bg-slate-800 w-full border-r dark:border-[1px] dark:border-blue-300 sm:border-gray-200 sm:w-[350px] bg-gray-50 p-2 sm:p-4 flex flex-col h-[270px] sm:h-full'>
       <div className='flex h-[50px] justify-between items-center px-2 py-3 mb-3'>
-        <h2 className='text-lg font-semibold text-gray-800 pt-2'>
+        <h2 className='text-lg font-semibold text-gray-800 dark:text-blue-200 pt-2'>
           {t('channelsContainer.channel')}
         </h2>
         <button
           type='button'
-          className='bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200'
+          className='bg-blue-500 dark:bg-blue-800 text-white rounded-full p-2 hover:bg-blue-600 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200'
           onClick={onAddChannel}
         >
           <svg
