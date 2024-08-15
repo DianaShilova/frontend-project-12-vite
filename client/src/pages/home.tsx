@@ -1,4 +1,10 @@
-import React, { useState, useContext, useMemo, useCallback } from 'react';
+import React, {
+  useState,
+  useContext,
+  useMemo,
+  useCallback,
+  useRef,
+} from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -25,10 +31,11 @@ const HomePage = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenModalDelete, setIsOpenModalDelete] = useState<boolean>(false);
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
-  const [showHearts, setShowHearts] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
   const [emoji, setEmoji] = useState<TEmoji>('/love');
   const { t } = useTranslation();
   const isDarkMode = document.documentElement.classList.contains('dark');
+  const animationQueue = useRef(Promise.resolve());
 
   const {
     sendMessage,
@@ -89,19 +96,35 @@ const HomePage = () => {
     }
   };
 
+  const runAnimation = (emojiType: TEmoji, duration: number) => {
+    return new Promise<void>((resolve) => {
+      setEmoji(emojiType);
+      setShowEmoji(true);
+      setTimeout(() => {
+        setShowEmoji(false);
+        setTimeout(resolve, 100);
+      }, duration);
+    });
+  };
+
+  const queueAnimation = (emojiType: TEmoji, duration: number) => {
+    animationQueue.current = animationQueue.current.then(() =>
+      runAnimation(emojiType, duration)
+    );
+  };
+
   const handleSubmitMessage = useCallback(
     async (e: React.FormEvent): Promise<void> => {
       e.preventDefault();
       const trimmedInput = input.trim();
+
       if (trimmedInput !== '') {
         try {
           if (trimmedInput.startsWith('/')) {
-            setShowHearts(true);
-            setEmoji(trimmedInput as TEmoji);
-            setTimeout(() => setShowHearts(false), 3000); // Hide hearts after 3 seconds
-          } else {
-            await sendMessage(filter.clean(trimmedInput));
+            queueAnimation(trimmedInput as TEmoji, 1000);
           }
+
+          await sendMessage(filter.clean(trimmedInput));
           setInput('');
         } catch (error) {
           console.log('error', error);
@@ -165,7 +188,7 @@ const HomePage = () => {
 
       <main className='dark:bg-slate-900 chat-body'>
         <div className='shadow-xl shadow-slate-500/40 m-[0px] sm:m-[24px] w-full flex flex-col sm:flex-row shadow'>
-          {showHearts && <EmojiAnimation command={emoji} />}
+          {showEmoji && <EmojiAnimation command={emoji} />}
           <Channels
             channels={channels}
             onAddChannel={handleAddChannel}

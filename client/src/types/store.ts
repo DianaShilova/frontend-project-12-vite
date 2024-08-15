@@ -39,3 +39,8 @@ export type TEmoji =
   | '/laugh'
   | '/snow'
   | '/confetti';
+
+export type AnimationQueueItem = {
+  emoji: TEmoji;
+  duration: number;
+};
