@@ -12,7 +12,7 @@ export const MessageInput = (props: Props) => {
 
   return (
     <form
-      className='flex items-center py-[0px] px-[4px] sm:p-3 border-t border-gray-200 dark:border-[1px] dark:border-blue-300'
+      className='flex items-center py-[0px] px-[4px] sm:p-3 border-t border-gray-200 border-[1px] border-slate-100 dark:border-blue-300'
       onSubmit={onSubmitMessage}
       noValidate
     >
