@@ -6,5 +6,14 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/77b2860c4cf428786915/maintainability)](https://codeclimate.com/github/DianaShilova/frontend-project-12/maintainability)
 
-Для локального запуска:
+To run a project(client & server) locally:
+    cd server
     npm run start-dev
+
+To run the client locally:
+    cd client
+    npm run dev
+
+To run the server locally:
+    cd server
+    npm run start
