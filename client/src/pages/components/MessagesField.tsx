@@ -27,7 +27,7 @@ export const MessagesField = (props: Props) => {
     ));
 
   return (
-    <div className='h-[305px] sm:h-full overflow-y-auto p-4 dark:bg-slate-800 border-[1px] border-slate-100 dark:border-blue-300 break-all overflow-wrap-anywhere'>
+    <div className='h-[305px] sm:h-full overflow-y-auto p-4 dark:bg-slate-800 break-all overflow-wrap-anywhere'>
       {messages ? (
         renderMessages()
       ) : (
