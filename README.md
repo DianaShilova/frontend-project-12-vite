@@ -18,9 +18,10 @@ Log in or create a new user and start communicating. You can create/edit/delete 
 **[Eslint](https://eslint.org/docs/latest/use/migrate-to-8.0.0)** - checks JavaScript code for common problems.  
 **[Husky](https://typicode.github.io/husky/)** - helps work with Git hooks more efficiently and run all the scripts that need to work at various stages.  
 **[Vite](https://vitejs.dev/)** - Vite is a tool for building fast and optimized web applications.  
-**[TailWind](https://tailwindcss.com/)** - for working with CSS styles, dark and light theme styling.   
+**[Tailwindcss](https://tailwindcss.com/)** - for working with CSS styles, dark and light theme styling.
 
 ## Using
+
 You can create a new user in registration page or login with previously created login and password.
 ![login](image.png)
 Create a new channel or go to previously created channel.
@@ -30,8 +31,6 @@ The chat have animation command: **'/love'**, **'/fire'**, **'/firework'**, **'/
 ![animation](image-6.png)
 In the last update was added dark them style. Can be used on the any page.
 ![alt text](image-3.png)
-
-
 
 ## Getting started
 
