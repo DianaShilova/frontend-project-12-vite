@@ -14,10 +14,10 @@ import useData from '../hooks/useData';
 import ChannelModal from '../components/ChannelModal';
 import DeletingChannelModal from '../components/DeletingChannelModal';
 import { AuthContext } from '../contexts/authContext';
-
+import PinnedMessage from '../pages/components/pinnedMessage/PinnedMessage';
 import './home.css';
 import { IRootState } from '../slices';
-import { IChannels, Messages, TEmoji } from '../types/store';
+import { IChannels, Messages, TEmoji, TPinnedMessage } from '../types/store';
 import { Navbar } from './components/Navbar';
 import { Channels } from './components/Channels';
 import { MessagesField } from './components/MessagesField';
@@ -33,6 +33,9 @@ const HomePage = () => {
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
   const [showEmoji, setShowEmoji] = useState(false);
   const [emoji, setEmoji] = useState<TEmoji>('/love');
+  const [pinnedMessage, setPinnedMessage] = React.useState<TPinnedMessage | ''>(
+    ''
+  );
   const { t } = useTranslation();
   const isDarkMode = document.documentElement.classList.contains('dark');
   const animationQueue = useRef(Promise.resolve());
@@ -44,6 +47,12 @@ const HomePage = () => {
     deleteChannel,
     renameChannel,
   } = useData();
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const channels = useSelector<IRootState, IChannels>((state) => {
     if (state && state.channels) {
@@ -204,7 +213,19 @@ const HomePage = () => {
               currentChannelId={currentChannelId}
               filtered={filtered}
             />
-            <MessagesField filtered={filtered} messages={messages} />
+            <PinnedMessage
+              currentChannelId={currentChannelId}
+              pinnedMessage={pinnedMessage}
+              setPinnedMessage={setPinnedMessage}
+            />
+            <MessagesField
+              currentChannelId={currentChannelId}
+              filtered={filtered}
+              messages={messages}
+              scrollToBottom={scrollToBottom}
+              messagesEndRef={messagesEndRef}
+              setPinnedMessage={setPinnedMessage}
+            />
             <MessageInput
               input={input}
               setInput={setInput}

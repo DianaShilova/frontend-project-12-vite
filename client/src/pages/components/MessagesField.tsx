@@ -1,18 +1,32 @@
-import { useEffect, useRef } from 'react';
-import { Message, Messages } from '../../types/store';
+import { useEffect } from 'react';
+import { Message, Messages, TPinnedMessage } from '../../types/store';
+import MessageItem from './pinnedMessage/MessageItem';
 
 interface Props {
   messages: Messages;
   filtered: Message[];
+  currentChannelId: string;
+  setPinnedMessage: (message: TPinnedMessage) => void;
+  scrollToBottom: (messageId?: string) => void;
+  messagesEndRef: React.RefObject<HTMLDivElement>;
 }
 
 export const MessagesField = (props: Props) => {
-  const { messages, filtered } = props;
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const {
+    messages,
+    filtered,
+    currentChannelId,
+    scrollToBottom,
+    setPinnedMessage,
+    messagesEndRef,
+  } = props;
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const pinnedMessages = JSON.parse(
+    localStorage.getItem('pinnedMessages') || '[]'
+  );
+  const hasPinnedMessage = pinnedMessages.some(
+    (msg: TPinnedMessage) => msg.channelId === currentChannelId
+  );
 
   useEffect(() => {
     scrollToBottom();
@@ -20,14 +34,23 @@ export const MessagesField = (props: Props) => {
 
   const renderMessages = (): JSX.Element[] =>
     filtered.map((message: Message) => (
-      <div key={message.id} className='mb-2'>
-        <b className='font-bold mr-1 dark:text-white'>{message.name}:</b>
-        <span className='text-gray-700 dark:text-white'>{message.text}</span>
-      </div>
+      <MessageItem
+        key={message.id}
+        {...message}
+        channelId={currentChannelId}
+        id={message.id}
+        content={message.text}
+        authorId={message.name}
+        setPinnedMessage={setPinnedMessage}
+      />
     ));
 
   return (
-    <div className='h-[305px] sm:h-full overflow-y-auto p-4 dark:bg-slate-800 dark:border-[1px] dark:border-blue-300 break-all overflow-wrap-anywhere'>
+    <div
+      className={`${
+        hasPinnedMessage ? 'h-[295px]' : 'h-[335px]'
+      } sm:h-full overflow-y-auto p-[4px] sm:p-[12px] dark:bg-slate-800 dark:border-[1px] dark:border-blue-300 break-all overflow-wrap-anywhere`}
+    >
       {messages ? (
         renderMessages()
       ) : (
