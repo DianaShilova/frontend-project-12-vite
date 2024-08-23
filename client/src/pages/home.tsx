@@ -204,7 +204,7 @@ const HomePage = () => {
               currentChannelId={currentChannelId}
               filtered={filtered}
             />
-            <MessagesField filtered={filtered} messages={messages} />
+            <MessagesField currentChannelId={currentChannelId} filtered={filtered} messages={messages} />
             <MessageInput
               input={input}
               setInput={setInput}

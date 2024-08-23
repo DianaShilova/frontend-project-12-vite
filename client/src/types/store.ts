@@ -10,6 +10,7 @@ export type Channel = {
   id: string;
   name: string;
   removable: boolean;
+  pinnedMessage: PinnedMessage | '';
 };
 
 export type Messages = {
@@ -18,6 +19,13 @@ export type Messages = {
     [key: string]: Message;
   };
 };
+
+export interface PinnedMessage {
+  id: string;
+  content: string;
+  authorId: string;
+  channelId: string;
+}
 
 export type Message = {
   id: string;
