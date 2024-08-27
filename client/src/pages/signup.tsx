@@ -1,5 +1,5 @@
-import { Navbar } from './components/Navbar';
-import { SignupWindow } from './components/SignupWindow';
+import { Navbar } from '../components/Navbar';
+import { SignupWindow } from '../components/SignupWindow';
 
 const SignupPage = () => {
   return (

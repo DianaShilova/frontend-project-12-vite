@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import './App.css';
+import '../App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider as ProviderRollbar, ErrorBoundary } from '@rollbar/react';
 import { ToastContainer } from 'react-toastify';

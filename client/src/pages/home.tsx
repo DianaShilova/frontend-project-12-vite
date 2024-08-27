@@ -11,19 +11,19 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import filter from 'leo-profanity';
 import useData from '../hooks/useData';
-import ChannelModal from '../components/ChannelModal';
-import DeletingChannelModal from '../components/DeletingChannelModal';
+import ChannelModal from '../components/modal/ChannelModal';
+import DeletingChannelModal from '../components/modal/DeletingChannelModal';
 import { AuthContext } from '../contexts/authContext';
-import PinnedMessage from '../pages/components/pinnedMessage/PinnedMessage';
+import { PinnedMessage } from '../components/PinnedMessage';
 import './home.css';
 import { IRootState } from '../slices';
 import { IChannels, Messages, TEmoji, TPinnedMessage } from '../types/store';
-import { Navbar } from './components/Navbar';
-import { Channels } from './components/Channels';
-import { MessagesField } from './components/MessagesField';
-import { MessagesTitle } from './components/MessagesTitle';
-import { MessageInput } from './components/MessageInput';
-import EmojiAnimation from './components/animation/EmojiAnimation';
+import { Navbar } from '../components/Navbar';
+import { Channels } from '../components/Channels';
+import { MessagesField } from '../components/MessagesField';
+import { MessagesTitle } from '../components/MessagesTitle';
+import { MessageInput } from '../components/MessageInput';
+import { EmojiAnimation } from '../components/EmojiAnimation';
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);

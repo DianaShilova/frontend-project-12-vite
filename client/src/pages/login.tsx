@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AuthContext } from '../contexts/authContext';
-import { Navbar } from './components/Navbar';
-import { LoginWindow } from './components/LoginWindow';
+import { Navbar } from '../components/Navbar';
+import { LoginWindow } from '../components/LoginWindow';
 
 const LoginPage = (): JSX.Element => {
   const authContext = useContext(AuthContext);

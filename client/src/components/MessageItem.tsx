@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import image from '../../../images/pin.png';
+import image from '../images/pin.png';
 
 interface MessageItemProps {
   id: string;
@@ -9,7 +9,7 @@ interface MessageItemProps {
   setPinnedMessage: (message: any) => void;
 }
 
-const MessageItem: React.FC<MessageItemProps> = (props) => {
+export const MessageItem: React.FC<MessageItemProps> = (props) => {
   const { id, content, authorId, channelId, setPinnedMessage } = props;
 
   const getPinnedMessages = () => {
@@ -73,5 +73,3 @@ const MessageItem: React.FC<MessageItemProps> = (props) => {
     </div>
   );
 };
-
-export default MessageItem;

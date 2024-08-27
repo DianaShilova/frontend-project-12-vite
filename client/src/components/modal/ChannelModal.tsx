@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
-import { selectChannel, selectChannels } from '../slices/selectors';
+import { selectChannel, selectChannels } from '../../slices/selectors';
 
 interface IProps {
   isOpen: boolean;

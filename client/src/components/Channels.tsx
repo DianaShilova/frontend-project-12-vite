@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { IChannels } from '../../types/store';
-import ChannelOption from '../../components/channelOption';
+import { IChannels } from '../types/store';
+import ChannelOption from './modal/channelOption';
 
 interface Props {
   channels: IChannels;
@@ -11,8 +11,6 @@ interface Props {
   currentChannelId: string;
   onSetChannel: (id: string) => void;
 }
-
-console.log(123);
 
 export const Channels = (props: Props) => {
   const {

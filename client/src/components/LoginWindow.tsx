@@ -1,12 +1,12 @@
 import FormBootstrap from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel';
-import image from '../../images/black.png';
+import image from '../images/black.png';
 import { Formik, Form } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useContext } from 'react';
-import { AuthContext } from '../../contexts/authContext';
+import { AuthContext } from '../contexts/authContext';
 
 export const LoginWindow = () => {
   const { t } = useTranslation();

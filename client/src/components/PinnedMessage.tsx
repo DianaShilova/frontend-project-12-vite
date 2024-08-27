@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
-const PinnedMessage = (props: {
+interface Props {
   pinnedMessage: any;
   setPinnedMessage: (message: any) => void;
   currentChannelId: string;
-}) => {
+}
+
+export const PinnedMessage = (props: Props) => {
   const { pinnedMessage, setPinnedMessage, currentChannelId } = props;
 
   const getPinnedMessage = () => {
@@ -108,5 +110,3 @@ const PinnedMessage = (props: {
     </div>
   );
 };
-
-export default PinnedMessage;

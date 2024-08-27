@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Message, Messages, TPinnedMessage } from '../../types/store';
-import MessageItem from './pinnedMessage/MessageItem';
+import { Message, Messages, TPinnedMessage } from '../types/store';
+import { MessageItem } from './MessageItem';
 
 interface Props {
   messages: Messages;

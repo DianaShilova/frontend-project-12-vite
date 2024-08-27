@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import filter from 'leo-profanity';
-import App from './components/App';
+import App from './components/App.js';
 import reportWebVitals from './reportWebVitals.js';
 import './i18next.js';
 
