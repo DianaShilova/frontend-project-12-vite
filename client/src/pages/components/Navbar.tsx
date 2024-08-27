@@ -12,7 +12,7 @@ export const Navbar = (props: Props) => {
   const authContext = useContext(AuthContext);
 
   return (
-    <header className='dark:border-[1px] dark:border-slate-700 dark:bg-slate-800 shadow-xl shadow-slate-500/20 m-[0px] sm:mx-[24px] mt-1'>
+    <header className='border-[1px] border-slate-100 dark:border-slate-700 dark:bg-slate-800 shadow-xl shadow-slate-500/20 m-[0px] sm:mx-[24px] mt-1n'>
       <nav className='px-4 w-full'>
         <div className='flex justify-between items-center py-2 max-w-7xl mx-auto'>
           <a

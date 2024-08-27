@@ -1,4 +1,3 @@
-// MessageItem.tsx
 import React, { useState } from 'react';
 import image from '../../../images/pin.png';
 

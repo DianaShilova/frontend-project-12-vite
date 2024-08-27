@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import image from '../../../images/pin.png';
 
 const PinnedMessage = (props: {
   pinnedMessage: any;
@@ -61,9 +60,9 @@ const PinnedMessage = (props: {
   }
 
   return (
-    <div className='pinned-message flex items-center justify-between dark:border-x-[1px] dark:border-blue-300 bg-gray-100 dark:bg-slate-700 p-2'>
+    <div className='pinned-message flex items-center justify-between dark:border-x-[1px] dark:border-blue-300 bg-gray-100 dark:bg-slate-700 py-2 px-[12px]'>
       <button
-        className='text-justify line-clamp-1 text-slate-500 hover:text-slate-700 transition-colors w-full text-left'
+        className='text-justify line-clamp-1 text-slate-500 hover:text-blue-900 w-full text-left'
         onClick={handleMessageClick}
         aria-label='Go to pinned message'
       >
@@ -75,15 +74,36 @@ const PinnedMessage = (props: {
         </span>
       </button>
       <button
-        className='flex ml-2 text-slate-500 hover:text-slate-700 transition-colors dark:invert'
+        className='flex ml-2 text-slate-500 dark:text-slate-200'
         onClick={handleUnpin}
         aria-label='Unpin message'
       >
-        <img
-          src={image}
-          alt='Pin'
-          className='w-5 h-5 min-w-[20px] min-h-[20px] max-w-[20px] max-h-[20px] object-contain'
-        />
+        <svg
+          className='w-5 h-5 '
+          viewBox='0 0 24 24'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <circle
+            cx='12'
+            cy='12'
+            r='10'
+            stroke='currentColor'
+            strokeWidth='2'
+          />
+          <path
+            d='M15 9L9 15'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+          />
+          <path
+            d='M9 9L15 15'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+          />
+        </svg>
       </button>
     </div>
   );
