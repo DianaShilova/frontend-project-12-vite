@@ -64,7 +64,7 @@ export const Channels = (props: Props) => {
     ));
 
   return (
-    <div className='dark:bg-slate-800 w-full border-r dark:border-[1px] dark:border-blue-300 sm:border-gray-200 sm:w-[350px] bg-gray-50 p-2 sm:p-4 flex flex-col h-[270px] sm:h-full'>
+    <div className='dark:bg-slate-800 w-full border-r border-[1px] border-slate-100 dark:border-blue-300 sm:border-gray-200 sm:w-[350px] bg-gray-50 p-2 sm:p-4 flex flex-col h-[270px] sm:h-full'>
       <div className='flex h-[50px] justify-between items-center px-2 py-3 mb-3'>
         <h2 className='text-lg font-semibold text-gray-800 dark:text-blue-200 pt-2'>
           {t('channelsContainer.channel')}
