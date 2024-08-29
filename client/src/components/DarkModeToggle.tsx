@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { AuthContext } from '../../contexts/authContext';
+import { AuthContext } from '../contexts/authContext';
 
 export const DarkModeToggle = () => {
   const { theme, toggleTheme } = useContext(AuthContext);

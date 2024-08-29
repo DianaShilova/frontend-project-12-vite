@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { IChannels } from '../../types/store';
+import { IChannels } from '../types/store';
 import { Message } from 'yup';
-import { getMessageFromQuantity } from '../../utils/getMessageFromQuantity';
+import { getMessageFromQuantity } from '../utils/getMessageFromQuantity';
 
 interface Props {
   channels: IChannels;

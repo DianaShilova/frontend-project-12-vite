@@ -1,7 +1,10 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import { TEmoji } from '../../../types/store';
+import { TEmoji } from '../types/store';
 
+interface Props {
+  command: TEmoji;
+}
 const colors = ['#ff0000', '#ff69b4', '#ff1493', '#ff6347', '#ff4500'];
 const sizes = ['0.5rem', '1rem', '1.5rem', '2rem', '2.5rem'];
 
@@ -21,7 +24,7 @@ const Emoji: React.FC<{
   <animated.div style={style}>{animation[emoji]}</animated.div>
 );
 
-const EmojiAnimation = (props: { command: TEmoji }) => {
+export const EmojiAnimation = (props: Props) => {
   const { command } = props;
   const emojies = Array.from({ length: 20 }, (_, i) => ({
     id: i,
@@ -77,5 +80,3 @@ const EmojiAnimation = (props: { command: TEmoji }) => {
     </div>
   );
 };
-
-export default EmojiAnimation;

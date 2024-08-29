@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../../contexts/authContext';
+import { AuthContext } from '../contexts/authContext';
 import { DarkModeToggle } from './DarkModeToggle';
 
 interface Props {

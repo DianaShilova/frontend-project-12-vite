@@ -13,7 +13,6 @@ export const usersApi = createApi({
         body,
       }),
     }),
-    // logout:
   }),
 });
 
